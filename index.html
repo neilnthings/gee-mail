@@ -3,16 +3,41 @@
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
     <script>
-      window.onload = function(){
+      window.onload = function()
+      {
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+        var messagecountvar = geemails.length;
+        document.getElementById("messsagecount").innerHTML = messagecountvar;
+
+ 	 	for (var i = 0; i < geemails.length; i++)
+ 	 	{
+          var headerformat = "<hr><a href='#' onclick='document.getElementById(\"hiddentext" + [i] + "\").style.display=\"block\"; return false;'>" + geemails[i].date + " | " + geemails[i].sender + " | " + geemails[i].subject + "</a><br>";
+          var messageformat = "<div id='hiddentext" + [i] + "' class='hidden'>" + geemails[i].body + "</div>";
+ 	 	  document.getElementById("mainbody").innerHTML += headerformat;
+ 	 	  document.getElementById("mainbody").innerHTML += messageformat;
+ 	 	}
+
+        var newmail = setInterval(addmail, 4000);
+
+        function addmail()
+        {
+          var newmessage = getNewMessage();
+          var headerformat = "<hr><a href='#' onclick='document.getElementById(\"hiddentext" + messagecountvar + "\").style.display=\"block\"; return false;'>" + newmessage.date + " | " + newmessage.sender + " : " + newmessage.subject + "</a><br>";
+          var messageformat = "<div id='hiddentext" + messagecountvar + "' class='hidden'>" + newmessage.body + "</div>";
+ 	 	  document.getElementById("mainbody").innerHTML += headerformat;
+ 	 	  document.getElementById("mainbody").innerHTML += messageformat;
+
+ 	 	  messagecountvar++;
+          document.getElementById("messsagecount").innerHTML = messagecountvar;
+        }
       };
     </script>
 	</head>
 	<body>
 		<div class="container" id="main">
-			Build Me!
+			<h1>Gee-Mail</h1>
+			<p id="mainbody">Inbox: <span id="messsagecount"></span></p>
 		</div>
 	</body>
 </html>

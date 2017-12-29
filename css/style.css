@@ -1,0 +1,10 @@
+#main { 
+	border: 1px solid black;
+	margin: 10px;
+	padding: 20px;
+}
+
+.hidden {
+	margin-top: 5px;
+	display: none;
+}
